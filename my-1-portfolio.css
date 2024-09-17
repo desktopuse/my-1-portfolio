@@ -1,0 +1,130 @@
+/* Anything inside the * selector is considered a global style(it gets applied to everything */
+*{
+  box-sizing: border-box;
+}
+
+/* Styling for the headers */
+h1, h2, h3, h4, h5, h6{
+  margin-top: -8px;
+}
+
+/* Styling for the body */
+body {
+  background-color: rgb(17, 17, 17);
+  color: white;
+  font-size: 14px;
+  /* You should already know this but it's for the grid */
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  /* vh = viewport height 100vh = 100% of the viewport/screen height*/
+  height: 100vh;
+  /* vw = viewport width */
+  width: 100vw;
+  margin: 0;
+  padding: 3em;
+  /* For gap between sections */
+  grid-gap: 1em;
+}
+
+/* Styling for the sections (The blocks that hold the content) */
+body > section {
+  border: 1px solid #555555;
+  border-radius: 0.5em;
+  padding: 1.5em;
+  overflow: hidden;
+  background-color: rgb(23, 23, 23);
+  position: relative;
+  overflow: inherit;
+}
+
+.img-html {
+  height: 50px;
+  width: 50px;
+}
+
+.img-fr {
+  height: 50px;
+  width: 80px;
+}
+
+.img-en {
+  height: 50px;
+  width: 80px;
+}
+
+/* Placing the sections in the grid */
+section#section-1 {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+}
+section#section-2 {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+}
+section#section-3 {
+  grid-column: 5 / 7;
+  grid-row: 1 / 5;
+}
+section#section-4 {
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
+}
+section#section-5 {
+  grid-column: 2 / 5;
+  grid-row: 2 / 5;
+}
+section#section-6 {
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+}
+
+/* Kevin Powell's code */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --clr-1: #052b2f;
+  --clr-2: #073438;
+  --clr-3: #0e4b50;
+  --clr-4: #2d8f85;
+  --clr-5: #637c54;
+}
+body > section:hover{
+  border-color: transparent;
+}
+body > section:hover::before,
+body > section:hover::after {
+  content: "";
+  position: absolute;
+  /* You can increase of decrease the size to change the border */
+  inset: -1.25px;
+  z-index: -1;
+  background: conic-gradient(
+    from var(--gradient-angle),
+    var(--clr-3),
+    var(--clr-4),
+    var(--clr-5),
+    var(--clr-4),
+    var(--clr-3)
+  );
+  border-radius: inherit;
+  animation: rotation 5s linear infinite;
+}
+
+body > section:hover::after {
+  /* You can increase of decrease the size to change the blur */
+  filter: blur(5px);
+}
+
+@keyframes rotation {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
